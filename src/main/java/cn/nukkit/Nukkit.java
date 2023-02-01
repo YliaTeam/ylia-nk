@@ -1,6 +1,6 @@
 package cn.nukkit;
 
-import cn.nukkit.command.CommandReader;
+import cn.nukkit.console.ConsoleCommandReader;
 import cn.nukkit.utils.MainLogger;
 import cn.nukkit.utils.ServerKiller;
 
@@ -87,7 +87,7 @@ public class Nukkit {
 
         logger.shutdown();
         logger.interrupt();
-        CommandReader.getInstance().removePromptLine();
+        ConsoleCommandReader.get().clearTerminal();
 
         if (ANSI) {
             System.out.print((char) 0x1b + "]0;Server Stopped" + (char) 0x07);
