@@ -1,7 +1,7 @@
 package cn.nukkit.utils;
 
 import cn.nukkit.Nukkit;
-import cn.nukkit.command.CommandReader;
+import cn.nukkit.console.ConsoleCommandReader;
 import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.Ansi.Attribute;
 import org.fusesource.jansi.Ansi.Color;
@@ -172,11 +172,13 @@ public class MainLogger extends ThreadedLogger {
     protected void send(String message, int level) {
         Date now = new Date();
         message = TextFormat.AQUA + new SimpleDateFormat("HH:mm:ss").format(now) + TextFormat.RESET + " " + message + TextFormat.RESET;
-        CommandReader.getInstance().stashLine();
+
         System.out.println(colorize(message));
-        CommandReader.getInstance().unstashLine();
+
         String str = new SimpleDateFormat("Y-M-d").format(now) + " " + TextFormat.clean(message) + "" + "\r\n";
         this.logStream += str;
+
+        ConsoleCommandReader.get().redrawBuffer();
 
         synchronized (this) {
             this.notify();

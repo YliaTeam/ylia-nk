@@ -1,5 +1,7 @@
 package cn.nukkit;
 
+import cn.nukkit.console.ConsoleCommandReader;
+
 /**
  * 描述一个可以被中断的线程的接口。<br>
  * An interface to describe a thread that can be interrupted.
@@ -11,7 +13,7 @@ package cn.nukkit;
  * @author MagicDroidX(code) @ Nukkit Project
  * @author 粉鞋大妈(javadoc) @ Nukkit Project
  * @see cn.nukkit.scheduler.AsyncWorker
- * @see cn.nukkit.command.CommandReader
+ * @see ConsoleCommandReader
  * @since Nukkit 1.0 | Nukkit API 1.0.0
  */
 public interface InterruptibleThread {

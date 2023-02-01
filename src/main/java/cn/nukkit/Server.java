@@ -3,6 +3,7 @@ package cn.nukkit;
 import cn.nukkit.block.Block;
 import cn.nukkit.blockentity.*;
 import cn.nukkit.command.*;
+import cn.nukkit.console.ConsoleCommandReader;
 import cn.nukkit.entity.Attribute;
 import cn.nukkit.entity.Entity;
 import cn.nukkit.entity.EntityHuman;
@@ -97,8 +98,6 @@ public class Server {
 
     private PluginManager pluginManager = null;
 
-    private int profilingTickrate = 20;
-
     private ServerScheduler scheduler = null;
 
     private int tickCounter;
@@ -115,11 +114,9 @@ public class Server {
 
     private int sendUsageTicker = 0;
 
-    private boolean dispatchSignals = false;
-
     private final MainLogger logger;
 
-    private final CommandReader console;
+    private final ConsoleCommandReader console;
 
     private SimpleCommandMap commandMap;
 
@@ -202,7 +199,7 @@ public class Server {
         this.dataPath = new File(dataPath).getAbsolutePath() + "/";
         this.pluginPath = new File(pluginPath).getAbsolutePath() + "/";
 
-        this.console = new CommandReader();
+        this.console = new ConsoleCommandReader();
         //todo: VersionString 现在不必要
 
         if (!new File(this.dataPath + "nukkit.yml").exists()) {
@@ -1077,8 +1074,10 @@ public class Server {
         }
 
         Runtime runtime = Runtime.getRuntime();
+
         double used = NukkitMath.round((double) (runtime.totalMemory() - runtime.freeMemory()) / 1024 / 1024, 2);
         double max = NukkitMath.round(((double) runtime.maxMemory()) / 1024 / 1024, 2);
+
         String usage = Math.round(used / max * 100) + "%";
         String title = (char) 0x1b + "]0;" + this.getName() + " " +
                 this.getNukkitVersion() +
